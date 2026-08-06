@@ -1592,6 +1592,49 @@ body, html {
     min-width: 150px;
 }
 
+.qr-share-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+.qr-code-box {
+    display: inline-flex;
+    padding: 18px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.qr-code-box img,
+.qr-code-box canvas {
+    display: block;
+    border-radius: 4px;
+}
+
+.qr-caption {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.qr-share-section--sidebar {
+    margin: 0.9rem 0 0 0;
+}
+
+.qr-code-box--sidebar {
+    padding: 12px;
+}
+
+.qr-code-box--sidebar img,
+.qr-code-box--sidebar canvas {
+    width: 150px;
+    height: 150px;
+}
+
 /* --- 8. ALERT MODAL STYLES --- */
 .alert-modal {
     min-width: 350px;
