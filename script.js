@@ -1452,9 +1452,14 @@ function updateConsoleDrawerTab(forceOpen) {
 }
 
 function getCleanSourceUrl() {
-    // Full source URL — protocol, host, and path — with only the query
-    // string and hash stripped off (per the updated "URL" field spec).
-    return window.location.href.split(/[?#]/)[0];
+    // Full source URL — host and path — with the query string/hash AND
+    // the protocol stripped off. The protocol isn't needed: results.html
+    // already strips "https://" before displaying it, and every "/" or
+    // ":" left in a URL param gets percent-encoded to 3 characters
+    // (e.g. "/" -> "%2F"), which is the single biggest thing bloating
+    // the QR's data length. Dropping "https://" alone removes 8 raw
+    // characters (and avoids encoding its ":" and "//").
+    return window.location.href.split(/[?#]/)[0].replace(/^https?:\/\//i, '');
 }
 
 function getActivityName() {
@@ -1539,8 +1544,10 @@ async function buildResultsShareUrl(rawScore, maxScore) {
 }
 
 function renderResultsQrCode(shareUrl) {
-    renderQrInto('qrCodeBox', shareUrl, 220);
-    renderQrInto('sidebarQrCodeBox', shareUrl, 150);
+    // Bigger box for the same module count = each square renders larger
+    // and more visible, on top of the data-shrinking above.
+    renderQrInto('qrCodeBox', shareUrl, 260);
+    renderQrInto('sidebarQrCodeBox', shareUrl, 170);
 }
 
 function renderQrInto(boxId, shareUrl, size) {
