@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -112,6 +113,10 @@
                         <div class="score-label">Score</div>
                     </div>
                 </div>
+                <div class="qr-share-section">
+                    <div id="qrCodeBox" class="qr-code-box" aria-label="QR code linking to a shareable results page"></div>
+                    <p class="qr-caption">Scan to view a shareable results page</p>
+                </div>
                 <div class="student-info-section">
                     <div class="info-item">
                         <span class="info-label">Email:</span>
@@ -160,6 +165,10 @@
             <div id="summaryPanel" class="summary-panel" role="status" aria-live="polite" aria-label="Total points">
                 <div class="summary-label">Total Points</div>
                 <div id="summaryValue" class="summary-value">0 / 0</div>
+                <div class="qr-share-section qr-share-section--sidebar">
+                    <div id="sidebarQrCodeBox" class="qr-code-box qr-code-box--sidebar" aria-label="QR code linking to a shareable results page"></div>
+                    <p class="qr-caption">Scan for shareable results</p>
+                </div>
             </div>
             <h3>Exercises</h3>
             <ul id="fileList" role="list"></ul>
