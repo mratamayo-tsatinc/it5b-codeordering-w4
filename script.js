@@ -1451,10 +1451,15 @@ function updateConsoleDrawerTab(forceOpen) {
     tab.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 }
 
-function getCleanAppUrl() {
-    // hostname excludes protocol, path, query string, and port —
-    // e.g. "mratamayo-tsatinc.github.io" only
-    return window.location.hostname;
+function getCleanSourceUrl() {
+    // Full source URL — protocol, host, and path — with only the query
+    // string and hash stripped off (per the updated "URL" field spec).
+    return window.location.href.split(/[?#]/)[0];
+}
+
+function getActivityName() {
+    // The web app's own page title, used as the "activity name" field.
+    return document.title;
 }
 
 // --- QR PAYLOAD ENCRYPTION ---
@@ -1528,13 +1533,8 @@ async function buildResultsShareUrl(rawScore, maxScore) {
     const token = await encryptQrPayload(payload);
     const url = new URL('https://mratamayo-tsatinc.github.io/qr/it5b-w4.html');
     url.searchParams.set('d', token);
-
-    // The app's domain isn't sensitive (it's a public hostname, identical
-    // for every student), and results.html lives on a DIFFERENT domain
-    // than the app itself — so results.html can't just read its own
-    // window.location.hostname to get it. It's sent as a plain, tiny,
-    // unencrypted param instead of bloating the encrypted token.
-    url.searchParams.set('a', getCleanAppUrl());
+    url.searchParams.set('a', getCleanSourceUrl());
+    url.searchParams.set('n', getActivityName());
     return url.toString();
 }
 
